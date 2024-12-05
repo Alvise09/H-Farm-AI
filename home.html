@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT Replica</title>
+    <title>H-Farm AI</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <style>
@@ -89,6 +89,22 @@
             <footer class="chat-footer">
                 <!-- Barra di input -->
                 <div class="input-container">
+
+                    <div id="file-name" class="file-name-display"></div>
+
+                    <div class="attach-item" onclick="toggleMenu(event)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9 7C9 4.23858 11.2386 2 14 2C16.7614 2 19 4.23858 19 7V15C19 18.866 15.866 22 12 22C8.13401 22 5 18.866 5 15V9C5 8.44772 5.44772 8 6 8C6.55228 8 7 8.44772 7 9V15C7 17.7614 9.23858 20 12 20C14.7614 20 17 17.7614 17 15V7C17 5.34315 15.6569 4 14 4C12.3431 4 11 5.34315 11 7V15C11 15.5523 11.4477 16 12 16C12.5523 16 13 15.5523 13 15V9C13 8.44772 13.4477 8 14 8C14.5523 8 15 8.44772 15 9V15C15 16.6569 13.6569 18 12 18C10.3431 18 9 16.6569 9 15V7Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    
+                    <div id="menu" class="menu">
+                        <div class="menu-item" onclick="handleOption('Paste link from Drive')">Paste link from Drive</div>
+                        <div class="menu-item" onclick="selectFile()">Select file</div>
+                    </div>
+
+                    <input type="file" id="fileInput" class="hidden-input" onchange="fileSelected(event)">
+
                     <input type="text" id="chat-input" placeholder="Make a request..." autocomplete="off">
                     <button id="send-button">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-2xl">
@@ -96,24 +112,32 @@
                         </svg>
                     </button>
                 </div>
+
+
                 <div class="container1">
-                    <div class="rect" id="rect1">
-                      <i class="icon">🗓️</i>
-                      <span>Timetable</span>
-                    </div>
-                    <div class="rect" id="rect2">
-                      <i class="icon">💼</i>
-                      <span>Services</span>
-                    </div>
-                    <div class="rect" id="rect3">
-                      <i class="icon">🧑‍🎓</i>
-                      <span>Find student</span>
-                    </div>
-                    <div class="rect" id="rect4">
+                    <button class="rect" onclick="updateInput('Timetable Request')">
+                        <i class="icon">🗓️</i>
+                        <span>Timetable</span>
+                    </button>
+                    <button class="rect" onclick="updateInput('Services Request')">
+                        <i class="icon">💼</i>
+                        <span>Services</span>
+                    </button>
+                    <button class="rect" onclick="updateInput('Find student Request')">
+                        <i class="icon">🧑‍🎓</i>
+                        <span>Find student</span>
+                    </button>
+                    <button class="rect" onclick="updateInput('Average grade Request')">
                         <i class="icon">📝</i>
                         <span>Average grade</span>
-                      </div>
-                  </div>
+                    </button>
+                </div>
+                
+
+
+
+
+
             </footer>
             
         </div>
@@ -145,5 +169,79 @@
         ? "Guest"
         : "Signed in with Google.";
   </script>
+
+<script>
+    function toggleMenu(event) {
+        const menu = document.getElementById('menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function handleOption(option) {
+        alert(`You selected: ${option}`);
+        document.getElementById('menu').style.display = 'none';
+    }
+
+    function selectFile() {
+        const fileInput = document.getElementById('fileInput');
+        fileInput.click(); // Simula il click sull'input nascosto
+    }
+
+    function fileSelected(event) {
+        const file = event.target.files[0];
+        const fileNameDisplay = document.getElementById('file-name');
+
+        if (file) {
+            fileNameDisplay.textContent = `${file.name}`;
+        } else {
+            fileNameDisplay.textContent = 'No file selected.';
+        }
+
+        document.getElementById('menu').style.display = 'none';
+    }
+
+    // Chiude il menu se clicchi fuori
+    document.addEventListener('click', (event) => {
+        const menu = document.getElementById('menu');
+        if (!event.target.closest('.attach-item') && !event.target.closest('#menu')) {
+            menu.style.display = 'none';
+        }
+    });
+</script>
+
+<script>
+    // Funzione per aggiornare il valore dell'input bar
+    function updateInput(text) {
+        const inputBar = document.getElementById('chat-input');
+        inputBar.value = text;
+    }
+</script>
+<script>
+    // Funzione per inviare il messaggio e nascondere container1
+    document.getElementById("send-button").addEventListener("click", function() {
+        // Nascondi container1 quando il pulsante di invio è premuto
+        document.querySelector(".container1").style.display = "none";
+    });
+</script>
+
+<script>
+    // Funzione per inviare il messaggio e spostare la barra di input in basso
+    document.getElementById("send-button").addEventListener("click", function() {
+        // Nascondi container1 quando il pulsante di invio è premuto
+        document.querySelector(".container1").style.display = "none";
+        
+        // Sposta la barra di input in basso dello schermo
+        document.querySelector(".chat-footer").style.position = "fixed"; // Posizione fissa
+        document.querySelector(".chat-footer").style.bottom = "0"; // Posiziona in basso
+        document.querySelector(".chat-footer").style.left = "50%"; // Centra orizzontalmente
+        document.querySelector(".chat-footer").style.transform = "translateX(-50%)"; // Compensa la posizione
+        document.querySelector(".chat-footer").style.width = "100%"; // Allarga la larghezza
+        document.querySelector(".chat-footer").style.maxWidth = "none"; // Rimuove il limite massimo di larghezza
+        document.querySelector(".chat-footer").classList.add("fixed");
+
+         document.getElementById("title").style.display = "none";
+
+    });
+</script>
+
 
 </html>
