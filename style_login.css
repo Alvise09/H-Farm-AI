@@ -1,0 +1,141 @@
+body {
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-card {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    width: 350px;
+}
+
+.login-card img {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center;
+    background-color: #ffffff;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    margin-bottom: 15px;
+}
+
+button:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.auth-button,
+.gsi-material-button {
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #747775;
+    border-radius: 20px;
+    color: #1f1f1f;
+    cursor: pointer;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 14px;
+    height: 40px;
+    letter-spacing: 0.25px;
+    padding: 0 12px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    min-width: min-content;
+    box-sizing: border-box;
+    transition: background-color .218s, border-color .218s, box-shadow .218s;
+    display: flex; /* Imposta flexbox */
+    align-items: center; /* Allinea l'icona e il testo verticalmente */
+    justify-content: center; /* Centra sia l'icona che il testo orizzontalmente */
+}
+
+.auth-button {
+    border: 0.3px solid #ccc;
+}
+
+.gsi-material-button:hover,
+.auth-button:hover {
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+}
+
+.gsi-material-button .gsi-material-button-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px; /* Distanza tra l'icona e il testo */
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+    flex-grow: 1;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gsi-material-button .gsi-material-button-state {
+    transition: opacity .218s;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.gsi-material-button:disabled {
+    cursor: default;
+    background-color: #ffffff61;
+    border-color: #1f1f1f1f;
+}
+
+.gsi-material-button:disabled .gsi-material-button-contents {
+    opacity: 38%;
+}
+
+.gsi-material-button:disabled .gsi-material-button-icon {
+    opacity: 38%;
+}
+
+.gsi-material-button:not(:disabled):active .gsi-material-button-state,
+.gsi-material-button:not(:disabled):focus .gsi-material-button-state {
+    background-color: #303030;
+    opacity: 12%;
+}
+
+.gsi-material-button:not(:disabled):hover .gsi-material-button-state {
+    background-color: #303030;
+    opacity: 8%;
+}
