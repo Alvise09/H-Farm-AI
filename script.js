@@ -79,19 +79,22 @@ const firebaseConfig = {
   };
   
   
-  firebase.initializeApp(firebaseConfig);
-  
-  const auth = firebase.auth();
-  const provider = new firebase.auth.GoogleAuthProvider();
-  
   document.getElementById("googleSignIn").addEventListener("click", () => {
-    firebase.auth().signInWithPopup(provider)
-      .then((result) => {
-        const user = result.user;
-        alert(`Benvenuto, ${user.displayName}!`);
-      })
-      .catch((error) => {
-        console.error("Errore durante il login:", error.message);
-        alert("Errore durante il login. Riprova");
-      });
-  });
+    auth.signInWithPopup(provider)
+        .then((result) => {
+            const user = result.user;
+
+            // Mostra il benvenuto
+            alert(`Benvenuto, ${user.displayName}!`);
+
+            // Mostra l'icona del profilo
+            const profileImage = document.getElementById("profileImage");
+            profileImage.src = user.photoURL; // URL della foto del profilo
+            profileImage.alt = user.displayName;
+            profileImage.style.display = "block"; // Mostra l'immagine
+        })
+        .catch((error) => {
+            console.error("Errore durante il login:", error.message);
+            alert("Errore durante il login. Riprova");
+        });
+});
